@@ -1,0 +1,6 @@
+/(^|^.*\.)ads.adfox.(ru)$/
+/(^|^.*\.)google-analytics.(com)$/
+/(^|^.*\.)googlesyndication.(com)$/
+ads.linkedin.com
+analytics.pointdrive.linkedin.com
+euc-word-telemetry.officeapps.live.com
