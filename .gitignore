@@ -17,3 +17,6 @@ logs
 
 # tools/builds
 tools/builds
+
+# Stub certs
+stub-certs
