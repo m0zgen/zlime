@@ -19,4 +19,4 @@ logs
 tools/builds
 
 # Stub certs
-stub-certs
+stub-cert*
