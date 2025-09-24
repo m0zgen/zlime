@@ -7,7 +7,7 @@ PATH=$PATH:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
 SCRIPT_PATH=$(cd `dirname "${BASH_SOURCE[0]}"` && pwd)
 
 BUILD_PATH="$SCRIPT_PATH/builds"
-BINARY_NAME="zbld"
+BINARY_NAME="zlime"
 
 # Build
 cd $SCRIPT_PATH; cd ..
