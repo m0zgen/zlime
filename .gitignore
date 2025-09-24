@@ -10,3 +10,7 @@ zlime
 
 # Dev files
 config-prod*
+
+# Logs
+logs
+*.log
