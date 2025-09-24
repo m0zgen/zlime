@@ -14,3 +14,6 @@ config-prod*
 # Logs
 logs
 *.log
+
+# tools/builds
+tools/builds
