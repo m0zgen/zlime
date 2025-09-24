@@ -9,7 +9,8 @@
 </head>
 <body>
 <header class="bg-dark text-white text-center py-3">
-    <h1>Manage Lists</h1>
+    <h1>zBLD Lists Manager</h1>
+    <button class="btn btn-outline-danger" onclick="window.location='/logout'">Logout</button>
 </header>
 <main class="container mt-4">
     <nav class="text-center mb-4">
@@ -19,11 +20,14 @@
 </main>
 <footer>
     <div class="container text-center py-3">
-        <p>&copy; 2024 Do-Tek LLP</p>
+        <p>&copy; <span id="year"></span></p>
     </div>
 </footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById("year").textContent = "Do-Tek LLC, 2024 - " + new Date().getFullYear();
+</script>
 </body>
 </html>
