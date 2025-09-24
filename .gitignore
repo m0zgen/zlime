@@ -7,3 +7,6 @@ tmp
 # Binary files
 domlists
 zlime
+
+# Dev files
+config-prod*
