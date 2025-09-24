@@ -1,0 +1,107 @@
+categories:
+  combined:
+    files:
+      - examples/pipe.txt
+      - examples/wildcard.txt
+      - examples/hosts-file.txt
+#      - https://raw.githubusercontent.com/m0zgen/cactusd/data/bl.txt
+      - https://v.firebog.net/hosts/static/w3kbl.txt
+      - https://v.firebog.net/hosts/AdguardDNS.txt
+      - https://v.firebog.net/hosts/Admiral.txt
+      - https://v.firebog.net/hosts/Easylist.txt
+      - https://v.firebog.net/hosts/Easyprivacy.txt
+      - https://v.firebog.net/hosts/Prigent-Ads.txt
+      - https://v.firebog.net/hosts/Prigent-Crypto.txt
+      - https://v.firebog.net/hosts/RPiList-Malware.txt
+      - https://v.firebog.net/hosts/RPiList-Phishing.txt
+#      - https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt
+#      - https://pgl.yoyo.org/adservers/serverlist.php?hostformat=hosts&showintro=0&mimetype=plaintext
+    userRegex: true
+    outputFile: output/combined-benzine.txt
+#    Export data from DB to consolidated file
+    consolidate: true
+    order: 1
+  plain:
+    files:
+      - examples/plain.txt
+    userRegex: true
+    outputFile: output/plain-benzine.txt
+    consolidate: true
+    order: 2
+  openbld-re:
+    files:
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/regex/common-bl.txt
+    userRegex: false
+    outputFile: output/openbld-re-prod-benzine.txt
+    consolidate: false
+    order: 3
+  ransom:
+    files:
+      - https://blocklistproject.github.io/Lists/alt-version/ransomware-nl.txt
+    userRegex: false
+    outputFile: output/ransom-prod-benzine.txt
+    consolidate: false
+    order: 3
+  whitelist:
+    files:
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/whitelist.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/vendors-wl/microsoft.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/vendors-wl/google.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/vendors-wl/yandex.txt
+      - https://raw.githubusercontent.com/m0zgen/dns-hole/master/regex/common-wl.txt
+    userRegex: false
+    outputFile: output/whitelist.txt
+    consolidate: false
+    order: 1
+# Regex patterns for parsing hosts files (default: combined)
+patterns:
+  # Default
+  combined: "(?i)(?:^0\\.0\\.0\\.0\\s+|^127\\.0\\.0\\.1\\s+|^\\|\\|@?|^\\*\\.|^-|^\\.|^)(?:!\\*)?([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})"
+  # Optional
+  hostFile: "^(?:(?:0\\.0\\.0\\.0\\s+0\\.0\\.0\\.0)|(?:0\\.0\\.0\\.0|127\\.0\\.0\\.1)\\s+(.*?))$"
+  pipeCaret: "\\|\\|(.*?)\\^$"
+  wildcard: "^\\*\\.(.*?)$"
+  plain: "(?i)(?:^)?([a-zA-Z0-9.-]+\\.[a-zA-Z]{2,})"
+# Download intervals in minutes (60)
+#intervalMinutes: 1
+consolidatedOutput: output/consolidated-benzine.txt
+updates:
+  enable: true
+  listsInterval: 120m
+  prometheusInterval: 10m
+  # Period for cleaning DB from old records
+  cleanDBInterval: 15m
+  cleanDBPeriod: 3h
+  # Walk to downloaded output files and reparse them for DB insert
+  updateFromOutputFiles: false
+# Database
+database:
+  enable: true
+  name: "benzine.db"
+# Clean options for downloaded files
+cleanOptions:
+  removeEmpty: true
+  removePrefixes: true
+  prefixes:
+    - "#"
+    - "!"
+    - "localhost"
+  # Kompressor section
+  # https://github.com/m0zgen/kompressor
+  runKompressor: true
+  kompressorPath: "tools/kompressor"
+# Web server options
+webServerOptions:
+    enable: true
+    port: 8080
+    catalog: "output"
+    cacheTTL: 1m
+prometheusOptions:
+  enable: true
+  port: 8081
+# Enable app logging
+enableLogging: true
+enableConsoleLogging: true
+logDir: "logs"
+logFile: "benzine.log"
+
